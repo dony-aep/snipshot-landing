@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { GridBackground } from "@/components/grid-background";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://snipshot.vercel.app"),
+  metadataBase: new URL("https://snipshotw3.vercel.app"),
   title: "SnipShot - Capturas de pantalla modernas para Windows",
   description: "Aplicación de captura de pantalla moderna para Windows. Captura, anota y comparte con herramientas profesionales. Open source y gratuita.",
   keywords: ["screenshot", "captura de pantalla", "windows", "winui3", "anotaciones", "ocr"],
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SnipShot - Capturas de pantalla modernas para Windows",
     description: "Aplicación de captura de pantalla moderna para Windows. Captura, anota y comparte con herramientas profesionales.",
-    url: "https://snipshot.vercel.app",
+    url: "https://snipshotw3.vercel.app",
     siteName: "SnipShot",
     locale: "es_ES",
     type: "website",
