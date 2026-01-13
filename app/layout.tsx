@@ -19,18 +19,18 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/logo-snipshot-app.png",
-        width: 512,
-        height: 512,
-        alt: "SnipShot Logo",
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SnipShot - Capturas de pantalla modernas para Windows",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "SnipShot - Capturas de pantalla modernas para Windows",
     description: "Aplicación de captura de pantalla moderna para Windows. Captura, anota y comparte con herramientas profesionales.",
-    images: ["/images/logo-snipshot-app.png"],
+    images: ["/images/og-image.png"],
   },
   robots: {
     index: true,

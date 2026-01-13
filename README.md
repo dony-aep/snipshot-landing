@@ -1,7 +1,7 @@
 # SnipShot Landing Page
 
 <p align="center">
-  <img src="snipshot-preview.gif" alt="SnipShot Preview" width="120">
+  <img src="snipshot-preview.gif" alt="SnipShot Preview" width="100%">
 </p>
 
 Landing page oficial de **SnipShot**, una aplicación de captura de pantalla moderna para Windows desarrollada con WinUI 3.
