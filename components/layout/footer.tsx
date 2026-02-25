@@ -1,33 +1,40 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { siteConfig, navItems } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { ScrollLink } from "@/components/scroll-link";
+import { useLocale } from "@/i18n";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLocale();
+
+  const navItems = [
+    { title: t.nav.features, href: "/features" },
+    { title: t.nav.tools, href: "/tools" },
+    { title: t.nav.technology, href: "/technology" },
+  ];
 
   return (
-    <footer className="relative border-t">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-t from-muted/50 to-transparent pointer-events-none" />
-      
-      <div className="container mx-auto px-4 py-16 relative z-10">
+    <footer className="border-t border-border/40">
+      <div className="container mx-auto px-4 py-14 md:py-16">
         {/* Main footer content */}
-        <div className="grid gap-12 md:grid-cols-12">
+        <div className="grid gap-10 md:grid-cols-12">
           {/* Brand section */}
-          <div className="md:col-span-5 space-y-4">
-            <Link href="/" className="inline-flex items-center gap-3 group">
+          <div className="md:col-span-5 space-y-3">
+            <Link href="/" className="inline-flex items-center gap-2.5 group">
               <Image 
                 src="/images/logo-snipshot-app.png" 
                 alt={`${siteConfig.name} Logo`}
-                width={40} 
-                height={40}
-                className="h-10 w-10 transition-transform group-hover:scale-105"
+                width={32} 
+                height={32}
+                className="h-8 w-8"
               />
-              <span className="text-2xl font-bold">{siteConfig.name}</span>
+              <span className="text-xl font-bold">{siteConfig.name}</span>
             </Link>
-            <p className="text-muted-foreground max-w-sm leading-relaxed">
-              {siteConfig.description}
+            <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
+              {t.site.description}
             </p>
           </div>
 
@@ -35,16 +42,16 @@ export function Footer() {
           <div className="md:col-span-7">
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
               {/* Navigation */}
-              <div className="space-y-4">
-                <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                  Navegación
+              <div className="space-y-3">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {t.footer.navigation}
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {navItems.map((item) => (
                     <li key={item.href}>
                       <Link 
                         href={item.href} 
-                        className="text-sm hover:text-primary transition-colors"
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
                         {item.title}
                       </Link>
@@ -54,17 +61,17 @@ export function Footer() {
               </div>
 
               {/* Resources */}
-              <div className="space-y-4">
-                <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                  Recursos
+              <div className="space-y-3">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {t.footer.resources}
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   <li>
                     <ScrollLink 
                       href="#download" 
-                      className="text-sm hover:text-primary transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      Descargar
+                      {t.footer.download}
                     </ScrollLink>
                   </li>
                   <li>
@@ -72,9 +79,9 @@ export function Footer() {
                       href={`${siteConfig.links.github}/releases`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-sm hover:text-primary transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      Releases
+                      {t.footer.releases}
                     </a>
                   </li>
                   <li>
@@ -82,28 +89,28 @@ export function Footer() {
                       href={`${siteConfig.links.github}#readme`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-sm hover:text-primary transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      Documentación
+                      {t.footer.documentation}
                     </a>
                   </li>
                 </ul>
               </div>
 
               {/* Project */}
-              <div className="space-y-4">
-                <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                  Proyecto
+              <div className="space-y-3">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {t.footer.project}
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   <li>
                     <a 
                       href={siteConfig.links.github}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-sm hover:text-primary transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      GitHub
+                      {t.footer.github}
                     </a>
                   </li>
                   <li>
@@ -111,14 +118,14 @@ export function Footer() {
                       href={`${siteConfig.links.github}/issues`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-sm hover:text-primary transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      Reportar bug
+                      {t.footer.reportBug}
                     </a>
                   </li>
                   <li>
-                    <span className="text-sm text-muted-foreground">
-                      Licencia MIT
+                    <span className="text-sm text-muted-foreground/70">
+                      {t.footer.license}
                     </span>
                   </li>
                 </ul>
@@ -128,13 +135,13 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">
-              © {currentYear} {siteConfig.name}.
+        <div className="mt-12 pt-6 border-t border-border/40">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+            <p className="text-xs text-muted-foreground">
+              © {currentYear} {siteConfig.name}
             </p>
-            <p className="text-sm text-muted-foreground">
-              Desarrollado con ❤️ por{" "}
+            <p className="text-xs text-muted-foreground">
+              {t.footer.madeWith}{" "}
               <a 
                 href={siteConfig.author.github}
                 target="_blank" 

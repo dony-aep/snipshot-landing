@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GridBackground } from "@/components/grid-background";
+import { LocaleProvider } from "@/i18n";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
@@ -53,8 +54,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <GridBackground />
-          {children}
+          <LocaleProvider>
+            <GridBackground />
+            {children}
+          </LocaleProvider>
         </ThemeProvider>
         <Analytics />
       </body>

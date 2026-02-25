@@ -8,13 +8,21 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LanguageSelector } from "@/components/language-selector";
 import { GitHubIcon } from "@/components/icons/simple-icon";
-import { siteConfig, navItems } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { useScrollToSection } from "@/hooks/use-scroll-to-section";
+import { useLocale } from "@/i18n";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollToSection } = useScrollToSection();
+  const { t } = useLocale();
+
+  const navItems = [
+    { title: t.nav.features, href: "/features" },
+    { title: t.nav.tools, href: "/tools" },
+    { title: t.nav.technology, href: "/technology" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,9 +47,9 @@ export function Header() {
         className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
       >
         <div 
-          className={`flex h-14 items-center gap-4 px-4 transition-all duration-300 ${
+          className={`flex h-14 items-center gap-4 px-5 transition-all duration-300 ${
             isScrolled || isMobileMenuOpen
-              ? "rounded-full border bg-background/80 backdrop-blur-md shadow-lg" 
+              ? "rounded-full border border-border/60 bg-background/70 backdrop-blur-xl shadow-sm" 
               : "bg-transparent"
           }`}
         >
@@ -58,15 +66,15 @@ export function Header() {
           </Link>
 
           {/* Separador - Desktop */}
-          <div className={`h-6 w-px bg-border hidden md:block transition-opacity ${isScrolled ? "opacity-100" : "opacity-50"}`} />
+          <div className={`h-5 w-px bg-border/50 hidden md:block transition-opacity ${isScrolled ? "opacity-100" : "opacity-40"}`} />
 
           {/* Navegación - Desktop */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5">
             {navItems.map((item) => (
               <Link 
                 key={item.href}
                 href={item.href} 
-                className="px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-colors"
+                className="px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground rounded-full transition-colors"
               >
                 {item.title}
               </Link>
@@ -74,7 +82,7 @@ export function Header() {
           </nav>
 
           {/* Separador - Desktop */}
-          <div className={`h-6 w-px bg-border hidden md:block transition-opacity ${isScrolled ? "opacity-100" : "opacity-50"}`} />
+          <div className={`h-5 w-px bg-border/50 hidden md:block transition-opacity ${isScrolled ? "opacity-100" : "opacity-40"}`} />
 
           {/* Acciones - Desktop */}
           <div className="hidden md:flex items-center gap-2">
@@ -84,7 +92,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               className="group relative flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              aria-label="Ver en GitHub"
+              aria-label={t.header.viewOnGithub}
             >
               <GitHubIcon className="h-5 w-5 transition-all group-hover:opacity-0 group-hover:scale-75" />
               <ExternalLink className="absolute h-5 w-5 opacity-0 scale-75 transition-all group-hover:opacity-100 group-hover:scale-100" />
@@ -95,7 +103,7 @@ export function Header() {
             <ModeToggle />
             
             <Button size="sm" className="rounded-full px-4" asChild>
-              <a href="#download" onClick={handleDownloadClick}>Descargar</a>
+              <a href="#download" onClick={handleDownloadClick}>{t.header.download}</a>
             </Button>
           </div>
 
@@ -108,7 +116,7 @@ export function Header() {
             <button
               className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-label={isMobileMenuOpen ? t.header.closeMenu : t.header.openMenu}
             >
               {isMobileMenuOpen ? (
                 <X className="h-5 w-5" />
@@ -163,7 +171,7 @@ export function Header() {
           <div className="px-6 pb-8 space-y-3">
             <Button size="lg" className="rounded-full w-full h-14 text-base" asChild>
               <a href="#download" onClick={handleDownloadClick}>
-                Descargar SnipShot
+                {t.header.downloadSnipshot}
               </a>
             </Button>
             
@@ -180,7 +188,7 @@ export function Header() {
                 onClick={closeMobileMenu}
               >
                 <GitHubIcon className="mr-2 h-5 w-5" />
-                Ver en GitHub
+                {t.header.viewOnGithub}
               </a>
             </Button>
           </div>

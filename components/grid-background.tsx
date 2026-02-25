@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
 
 export function GridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -15,67 +17,74 @@ export function GridBackground() {
     let animationFrameId: number;
     let time = 0;
 
+    const isDark = resolvedTheme === "dark";
+
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.scale(dpr, dpr);
     };
 
-    const drawGrid = () => {
-      const gridSize = 60;
-      const dotSize = 0.6;
+    const draw = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const gridSize = 28;
+      const dotBase = 0.6;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, w, h);
 
-      // Glow position (moves in a figure-8 pattern)
-      const glowX = canvas.width / 2 + Math.sin(time * 0.5) * canvas.width * 0.3;
-      const glowY = canvas.height / 2 + Math.sin(time * 0.7) * canvas.height * 0.2;
-      const glowRadius = 400;
+      // Slow breathing pulse
+      const pulse = 0.5 + 0.5 * Math.sin(time * 0.4);
 
-      // Draw dots
-      for (let x = 0; x < canvas.width; x += gridSize) {
-        for (let y = 0; y < canvas.height; y += gridSize) {
-          const distX = x - glowX;
-          const distY = y - glowY;
-          const distance = Math.sqrt(distX * distX + distY * distY);
-          
-          // Calculate opacity based on distance from glow
-          const glowIntensity = Math.max(0, 1 - distance / glowRadius);
-          const baseOpacity = 0.15;
-          const opacity = baseOpacity + glowIntensity * 0.6;
+      // Two soft glow centers that drift slowly
+      const g1x = w * 0.5 + Math.sin(time * 0.15) * w * 0.25;
+      const g1y = h * 0.4 + Math.cos(time * 0.2) * h * 0.15;
+      const g2x = w * 0.5 + Math.cos(time * 0.12) * w * 0.2;
+      const g2y = h * 0.6 + Math.sin(time * 0.18) * h * 0.12;
+      const glowRadius = Math.max(w, h) * 0.35;
 
-          // Color: primary color when close to glow, gray otherwise
-          const hue = 200; // Matches primary color
-          const saturation = glowIntensity * 60;
-          const lightness = 50 + glowIntensity * 20;
+      const baseAlpha = isDark ? 0.08 : 0.12;
+      const glowAlpha = isDark ? 0.25 : 0.35;
+      const hue = 230;
+
+      for (let x = gridSize; x < w; x += gridSize) {
+        for (let y = gridSize; y < h; y += gridSize) {
+          const d1 = Math.hypot(x - g1x, y - g1y);
+          const d2 = Math.hypot(x - g2x, y - g2y);
+          const intensity = Math.max(
+            0,
+            1 - d1 / glowRadius,
+            (1 - d2 / glowRadius) * 0.7
+          );
+
+          const alpha = baseAlpha + intensity * glowAlpha * pulse;
+          const sat = intensity * 40;
+          const light = isDark ? 60 + intensity * 15 : 45 + intensity * 10;
+          const radius = dotBase + intensity * pulse * 0.6;
 
           ctx.beginPath();
-          ctx.arc(x, y, dotSize + glowIntensity * 1, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${opacity})`;
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${hue}, ${sat}%, ${light}%, ${alpha})`;
           ctx.fill();
         }
       }
 
-      // Draw subtle glow
-      const gradient = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, glowRadius);
-      gradient.addColorStop(0, "hsla(200, 80%, 50%, 0.08)");
-      gradient.addColorStop(1, "hsla(200, 80%, 50%, 0)");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      time += 0.01;
-      animationFrameId = requestAnimationFrame(drawGrid);
+      time += 0.012;
+      animationFrameId = requestAnimationFrame(draw);
     };
 
     resize();
-    drawGrid();
+    draw();
 
     window.addEventListener("resize", resize);
-
     return () => {
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [resolvedTheme]);
 
   return (
     <canvas

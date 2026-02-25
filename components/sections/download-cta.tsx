@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Download, Scale, Monitor, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
 import { GitHubIcon } from "@/components/icons/simple-icon";
+import { useLocale } from "@/i18n";
 
 const architectures = [
   { name: "x64", label: "64-bit" },
@@ -12,11 +13,11 @@ const architectures = [
 ];
 
 export function DownloadCTA() {
+  const { t } = useLocale();
   return (
-    <section id="download" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="download" className="py-28 md:py-36 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -24,23 +25,23 @@ export function DownloadCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mx-auto max-w-3xl"
+          className="mx-auto max-w-2xl"
         >
           {/* Header */}
           <div className="text-center mb-10">
             <Badge variant="outline" className="mb-4 px-4 py-1.5">
               <Scale className="mr-2 h-3.5 w-3.5" />
-              Open Source • Licencia MIT
+              {t.download.badge}
             </Badge>
             
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
-              Descarga{" "}
-              <span className="text-primary">SnipShot</span>
-              {" "}gratis
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">
+              {t.download.titleStart}
+              <span className="text-primary">{t.download.titleAccent}</span>
+              {t.download.titleEnd}
             </h2>
             
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Completamente gratuito y de código abierto. Mejora tu productividad con capturas de pantalla profesionales.
+            <p className="text-muted-foreground text-lg max-w-lg mx-auto">
+              {t.download.description}
             </p>
           </div>
 
@@ -50,18 +51,18 @@ export function DownloadCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-2xl border bg-card/50 backdrop-blur-sm p-8 md:p-10"
+            className="rounded-2xl border border-border/40 bg-card/50 backdrop-blur-sm p-8 md:p-10"
           >
             {/* System Requirements */}
             <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Monitor className="h-4 w-4" />
-                <span>Windows 11 (22H2+)</span>
+                <span>{t.download.systemWindows}</span>
               </div>
               <div className="h-4 w-px bg-border hidden sm:block" />
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Cpu className="h-4 w-4" />
-                <span>Arquitecturas:</span>
+                <span>{t.download.architectures}</span>
                 <div className="flex gap-1.5">
                   {architectures.map((arch) => (
                     <Badge key={arch.name} variant="secondary" className="text-xs px-2 py-0.5">
@@ -77,7 +78,7 @@ export function DownloadCTA() {
               <Button size="lg" className="w-full sm:w-auto px-8 h-12 text-base" asChild>
                 <a href="https://github.com/dony-aep/SnipShot/releases" target="_blank" rel="noopener noreferrer">
                   <Download className="mr-2 h-5 w-5" />
-                  Descargar para Windows
+                  {t.download.downloadButton}
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 h-12 text-base" asChild>
@@ -87,14 +88,14 @@ export function DownloadCTA() {
                   rel="noopener noreferrer"
                 >
                   <GitHubIcon className="mr-2 h-5 w-5" />
-                  Ver en GitHub
+                  {t.download.githubButton}
                 </a>
               </Button>
             </div>
 
             {/* Version info */}
             <p className="mt-6 text-center text-xs text-muted-foreground">
-              Última versión disponible en GitHub Releases
+              {t.download.versionNote}
             </p>
           </motion.div>
         </motion.div>

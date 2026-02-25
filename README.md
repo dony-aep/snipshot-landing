@@ -4,42 +4,46 @@
   <img src="snipshot-preview.gif" alt="SnipShot Preview" width="100%">
 </p>
 
-Landing page oficial de **SnipShot**, una aplicación de captura de pantalla moderna para Windows desarrollada con WinUI 3.
-
-**Aplicación principal:** [github.com/dony-aep/SnipShot](https://github.com/dony-aep/SnipShot)
+<p align="center">
+  <strong>English</strong> · <a href="README.es.md">Español</a>
+</p>
 
 ---
 
-## Sobre SnipShot
+Official landing page for **SnipShot**, a modern screenshot application for Windows built with WinUI 3.
 
-SnipShot es una herramienta de captura de pantalla diseñada para integrarse perfectamente con el flujo de trabajo profesional en Windows. Combina una interfaz moderna con potentes funcionalidades de anotación.
+**Main application:** [github.com/dony-aep/SnipShot](https://github.com/dony-aep/SnipShot)
 
-### Características principales
+## About SnipShot
 
-| Característica | Descripción |
-|----------------|-------------|
-| **4 modos de captura** | Pantalla completa, región rectangular, forma libre y ventana específica |
-| **Selector de color** | Menú flotante para capturar colores en formato HEX, RGB o HSL |
-| **Formas y emojis** | Añade formas geométricas, flechas, líneas, estrellas y emojis |
-| **Anotaciones completas** | Texto, bolígrafo, resaltador, relleno y más |
-| **Extracción de texto (OCR)** | Captura el texto de cualquier imagen automáticamente |
-| **Búsqueda de imagen** | Búsquedas inversas de imágenes con Google o Bing |
+SnipShot is a screenshot tool designed to integrate seamlessly with your professional workflow on Windows. It combines a modern interface with powerful annotation features.
 
-### Herramientas de anotación
+### Key Features
 
-- **Formas** — Rectángulos, círculos, líneas, flechas y estrellas
-- **Bolígrafo** — Dibujo libre con colores personalizables
-- **Resaltador** — Resalta áreas con transparencia ajustable
-- **Texto** — Diferentes estilos, colores y resaltado
-- **Emojis** — Inserta emojis directamente en tus capturas
-- **Relleno** — Aplica relleno con color y opacidad a formas
-- **Recorte** — Ajusta el área después de capturar
-- **Rotación** — Rota formas y anotaciones libremente
-- **Deshacer/Rehacer** — Historial completo de cambios
+| Feature | Description |
+|---------|-------------|
+| **4 capture modes** | Full screen, rectangular region, freeform and specific window |
+| **Color picker** | Floating menu to capture colors in HEX, RGB or HSL format |
+| **Shapes and emojis** | Add geometric shapes, arrows, lines, stars and emojis |
+| **Full annotations** | Text, pen, highlighter, fill and more |
+| **Text extraction (OCR)** | Extract text from any image automatically |
+| **Image search** | Reverse image searches with Google or Bing |
 
-### Stack tecnológico de SnipShot
+### Annotation Tools
 
-| Tecnología | Versión |
+- **Shapes** — Rectangles, circles, lines, arrows and stars
+- **Pen** — Freehand drawing with customizable colors
+- **Highlighter** — Highlight areas with adjustable transparency
+- **Text** — Different styles, colors and highlighting
+- **Emojis** — Insert emojis directly into your captures
+- **Fill** — Apply fill with color and opacity to shapes
+- **Crop** — Adjust the area after capture
+- **Rotation** — Rotate shapes and annotations freely
+- **Undo/Redo** — Complete change history
+
+### SnipShot Tech Stack
+
+| Technology | Version |
 |------------|---------|
 | .NET | 10.0 |
 | Windows App SDK | 1.8 |
@@ -47,78 +51,70 @@ SnipShot es una herramienta de captura de pantalla diseñada para integrarse per
 | Win2D | 1.3.2 |
 | C# | 12 |
 
-### Requisitos del sistema
+### System Requirements
 
-- Windows 11 versión 22H2 (build 22621) o superior
-- Arquitecturas soportadas: **x64**, **ARM64**
-- No compatible con Windows 10 ni versiones anteriores
+- Windows 11 version 22H2 (build 22621) or higher
+- Supported architectures: **x64**, **ARM64**
+- Not compatible with Windows 10 or earlier versions
 
----
+## About this Landing Page
 
-## Sobre esta Landing Page
+This landing page is built with modern web technologies to showcase SnipShot.
 
-Esta landing page está construida con tecnologías web modernas para presentar SnipShot.
+### Tech Stack
 
-### Stack tecnológico
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| [Next.js](https://nextjs.org/) | 16.1.1 | React framework with App Router |
+| [React](https://react.dev/) | 19.2.3 | UI library |
+| [Tailwind CSS](https://tailwindcss.com/) | v4 | Utility-first styling |
+| [shadcn/ui](https://ui.shadcn.com/) | - | UI components (new-york style) |
+| [Framer Motion](https://www.framer.com/motion/) | 12.x | Animations |
+| [next-themes](https://github.com/pacocoursey/next-themes) | 0.4.x | Light/dark theme |
+| [Lucide React](https://lucide.dev/) | - | Icons |
+| TypeScript | 5.x | Static typing |
 
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| [Next.js](https://nextjs.org/) | 16.1.1 | Framework React con App Router |
-| [React](https://react.dev/) | 19.2.3 | Biblioteca de UI |
-| [Tailwind CSS](https://tailwindcss.com/) | v4 | Estilos utility-first |
-| [shadcn/ui](https://ui.shadcn.com/) | - | Componentes UI (estilo new-york) |
-| [Framer Motion](https://www.framer.com/motion/) | 12.x | Animaciones |
-| [next-themes](https://github.com/pacocoursey/next-themes) | 0.4.x | Tema claro/oscuro |
-| [Lucide React](https://lucide.dev/) | - | Iconos |
-| TypeScript | 5.x | Tipado estático |
+## Development
 
----
+### Prerequisites
 
-## Desarrollo
+- Node.js 20.9 or higher
+- pnpm, npm, yarn or bun
 
-### Requisitos previos
-
-- Node.js 20.9 o superior
-- pnpm, npm, yarn o bun
-
-### Instalación
+### Installation
 
 ```bash
-# Clonar el repositorio
+# Clone the repository
 git clone https://github.com/dony-aep/snipshot-landing.git
 cd snipshot-landing
 
-# Instalar dependencias
+# Install dependencies
 npm install
 ```
 
-### Comandos disponibles
+### Available Commands
 
 ```bash
-# Servidor de desarrollo
+# Development server
 npm run dev
 
-# Build de producción
+# Production build
 npm run build
 
-# Iniciar servidor de producción
+# Start production server
 npm run start
 
 # Linting
 npm run lint
 ```
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
----
+## License
 
-## Licencia
+This project is under the [MIT License](LICENSE).
 
-Este proyecto está bajo la [Licencia MIT](LICENSE).
-
----
-
-## Autor
+## Author
 
 **dony.**
 
