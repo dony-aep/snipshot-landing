@@ -1,8 +1,9 @@
 import { ToolsContent } from "./content";
 
 export const metadata = {
-  title: "Tools - SnipShot",
-  description: "Explore all SnipShot annotation tools: shapes, pen, highlighter, text and more.",
+  title: "Herramientas - SnipShot",
+  description:
+    "Formas, bolígrafo, resaltador, texto, emojis, relleno, recorte y rotación en la barra de anotación de SnipShot.",
 };
 
 export default function ToolsPage() {

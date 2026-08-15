@@ -9,10 +9,10 @@ export function BackButton() {
   return (
     <Link
       href="/"
-      className="fixed top-5 left-5 z-40 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-background/70 backdrop-blur-xl border border-border/60 shadow-sm hover:bg-muted transition-colors"
+      className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
     >
-      <ArrowLeft className="h-4 w-4" />
-      <span className="hidden sm:inline">{t.common.home}</span>
+      <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
+      {t.common.home}
     </Link>
   );
 }

@@ -1,8 +1,9 @@
 import { FeaturesContent } from "./content";
 
 export const metadata = {
-  title: "Features - SnipShot",
-  description: "Discover all SnipShot features: capture modes, annotations, OCR and more.",
+  title: "Características - SnipShot",
+  description:
+    "Los cinco modos de captura de SnipShot, sus herramientas de anotación, la extracción de texto y la búsqueda de imagen.",
 };
 
 export default function FeaturesPage() {

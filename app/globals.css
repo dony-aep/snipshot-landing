@@ -6,8 +6,15 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "Cascadia Code", "Consolas", monospace;
+  /* Segoe UI Variable primero, con sus dos ópticas: Display para titulares y
+     Text para lectura, que es la misma división que usa la app. Fuera de
+     Windows no existe, y entonces caen las webfonts como respaldo. */
+  --font-sans: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", var(--font-public-sans), system-ui, sans-serif;
+  --font-display: "Segoe UI Variable Display", "Segoe UI Variable", "Segoe UI", var(--font-bricolage), system-ui, sans-serif;
+  --font-mono: "Cascadia Code", "Cascadia Mono", Consolas, var(--font-plex-mono), monospace;
+  --color-selection: var(--selection);
+  --color-highlighter: var(--highlighter);
+  --color-rule: var(--rule);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,26 +53,36 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+/* Paleta "Selección": el claro es el escritorio capturado, el oscuro es el velo
+   atenuado que la app dibuja fuera de la selección. El azur es el trazo del
+   rectángulo; el ámbar es tinta de resaltador y solo aparece al anotar. */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.995 0 0);
-  --foreground: oklch(0.141 0.005 285);
-  --card: oklch(0.975 0.002 265);
-  --card-foreground: oklch(0.141 0.005 285);
-  --popover: oklch(0.995 0 0);
-  --popover-foreground: oklch(0.141 0.005 285);
-  --primary: oklch(0.475 0.14 252);
+  --radius: 0.5rem;
+  --background: oklch(0.985 0.004 250);
+  --foreground: oklch(0.19 0.022 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.19 0.022 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.19 0.022 265);
+  --primary: oklch(0.48 0.17 248);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.965 0.003 265);
-  --secondary-foreground: oklch(0.2 0.005 285);
-  --muted: oklch(0.955 0.003 265);
-  --muted-foreground: oklch(0.487 0.01 265);
-  --accent: oklch(0.955 0.005 265);
-  --accent-foreground: oklch(0.2 0.005 285);
+  --secondary: oklch(0.955 0.006 255);
+  --secondary-foreground: oklch(0.24 0.02 265);
+  --muted: oklch(0.955 0.006 255);
+  --muted-foreground: oklch(0.47 0.02 258);
+  --accent: oklch(0.945 0.012 250);
+  --accent-foreground: oklch(0.24 0.02 265);
   --destructive: oklch(0.55 0.22 27);
-  --border: oklch(0.915 0.003 265);
-  --input: oklch(0.915 0.003 265);
-  --ring: oklch(0.475 0.14 252);
+  --border: oklch(0.895 0.006 258);
+  --input: oklch(0.895 0.006 258);
+  --ring: oklch(0.48 0.17 248);
+  --selection: oklch(0.48 0.17 248);
+  --highlighter: oklch(0.8 0.16 78);
+  /* El ámbar del trazo da 1.84:1 sobre este fondo. Sirve para una línea, no
+     para texto, así que la palabra usa una tinta más oscura: 4.22:1. */
+  --highlighter-ink: oklch(0.58 0.15 70);
+  --rule: oklch(0.885 0.006 258);
+  --scrim: oklch(0.19 0.022 265 / 0.09);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -82,24 +99,30 @@
 }
 
 .dark {
-  --background: oklch(0.13 0.015 265);
-  --foreground: oklch(0.915 0.005 265);
-  --card: oklch(0.17 0.015 265);
-  --card-foreground: oklch(0.915 0.005 265);
-  --popover: oklch(0.17 0.015 265);
-  --popover-foreground: oklch(0.915 0.005 265);
-  --primary: oklch(0.68 0.13 245);
-  --primary-foreground: oklch(0.1 0.015 265);
-  --secondary: oklch(0.2 0.015 265);
-  --secondary-foreground: oklch(0.9 0.005 265);
-  --muted: oklch(0.2 0.015 265);
-  --muted-foreground: oklch(0.58 0.01 265);
-  --accent: oklch(0.22 0.015 265);
-  --accent-foreground: oklch(0.9 0.005 265);
+  --background: oklch(0.17 0.022 265);
+  --foreground: oklch(0.93 0.008 258);
+  --card: oklch(0.21 0.022 265);
+  --card-foreground: oklch(0.93 0.008 258);
+  --popover: oklch(0.21 0.022 265);
+  --popover-foreground: oklch(0.93 0.008 258);
+  --primary: oklch(0.72 0.16 235);
+  --primary-foreground: oklch(0.16 0.022 265);
+  --secondary: oklch(0.24 0.022 265);
+  --secondary-foreground: oklch(0.93 0.008 258);
+  --muted: oklch(0.24 0.022 265);
+  --muted-foreground: oklch(0.65 0.015 258);
+  --accent: oklch(0.27 0.025 262);
+  --accent-foreground: oklch(0.93 0.008 258);
   --destructive: oklch(0.65 0.2 22);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.68 0.13 245);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.72 0.16 235);
+  --selection: oklch(0.72 0.16 235);
+  --highlighter: oklch(0.83 0.15 75);
+  /* Sobre el fondo oscuro el mismo ámbar ya da 11.09:1, no hace falta bajarlo. */
+  --highlighter-ink: oklch(0.83 0.15 75);
+  --rule: oklch(1 0 0 / 11%);
+  --scrim: oklch(0.09 0.02 265 / 0.55);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -117,12 +140,140 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   html {
     scroll-behavior: smooth;
   }
+  /* El header es fijo, así que un salto por ancla dejaba el titular debajo.
+     Pasa tanto al pulsar un enlace como al abrir la URL con el hash puesto. */
+  section[id],
+  [id="download"] {
+    scroll-margin-top: 6rem;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+  /* El foco hereda el trazo de la selección: el mismo azur que marca el área
+     capturada marca el elemento activo. */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-selection;
+  }
+  ::selection {
+    background: var(--selection);
+    color: var(--primary-foreground);
+  }
+  /* Rejilla de píxel estática. Sustituye al canvas animado que redibujaba
+     ~2000 puntos por frame de forma indefinida. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+    pointer-events: none;
+    background-image: radial-gradient(currentColor 0.5px, transparent 0.5px);
+    background-size: 28px 28px;
+    color: var(--foreground);
+    opacity: 0.05;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Rectángulo de selección: esquinas vivas y el resto de la página atenuado
+     con un box-shadow desbordado, que es como la app oscurece lo que queda
+     fuera del área capturada. */
+  .capture-frame {
+    border: 1.5px solid var(--selection);
+    border-radius: 0;
+    box-shadow: 0 0 0 100vmax var(--scrim);
+  }
+
+  /* Tiradores de arrastre en las cuatro esquinas. */
+  .capture-handle {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: var(--selection);
+    outline: 1.5px solid var(--background);
+  }
+
+  /* La tira de herramientas ya avisa de que hay más contenido con el chip
+     cortado en el borde, así que la barra no aporta y ensucia. */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Lienzo sobre el que se dibujan las marcas de anotación. La rejilla de píxel
+     lo hace leer como una captura y no como una tarjeta vacía. */
+  .capture-surface {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--foreground) 14%, transparent) 0.5px,
+      transparent 0.5px
+    );
+    background-size: 22px 22px;
+  }
+
+  /* Guías de encuadre: se prolongan desde los bordes de la selección hasta
+     salirse del viewport. */
+  .capture-guide {
+    position: absolute;
+    background: var(--selection);
+    opacity: 0.28;
+    pointer-events: none;
+  }
+
+  /* La palabra acentuada va en tinta de resaltador. Al pasar el cursor por el
+     titular, recupera el color del texto y el trazo se dibuja de izquierda a
+     derecha, como si el color bajara de la palabra a la línea. El acento se ve
+     sin hover, que es lo único que hay en táctil. */
+  .marker-swipe {
+    position: relative;
+    white-space: nowrap;
+    color: var(--highlighter-ink);
+    transition: color 0.35s ease;
+  }
+  .marker-swipe::after {
+    content: "";
+    position: absolute;
+    left: -0.04em;
+    right: -0.06em;
+    bottom: 0.03em;
+    height: 0.15em;
+    background: var(--highlighter);
+    border-radius: 0.08em 0.24em 0.1em 0.2em;
+    /* El trazo se queda bajo la línea base: cruzar los glifos hundiría el
+       contraste del texto sobre el ámbar. */
+    transform: rotate(-0.7deg) scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .marker-heading:hover .marker-swipe,
+  .marker-swipe:hover {
+    color: var(--foreground);
+  }
+  .marker-heading:hover .marker-swipe::after,
+  .marker-swipe:hover::after {
+    transform: rotate(-0.7deg) scaleX(1);
   }
 }

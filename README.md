@@ -22,7 +22,7 @@ SnipShot is a screenshot tool designed to integrate seamlessly with your profess
 
 | Feature | Description |
 |---------|-------------|
-| **4 capture modes** | Full screen, rectangular region, freeform and specific window |
+| **5 capture modes** | Full screen, rectangular region, freeform, specific window and color picker |
 | **Color picker** | Floating menu to capture colors in HEX, RGB or HSL format |
 | **Shapes and emojis** | Add geometric shapes, arrows, lines, stars and emojis |
 | **Full annotations** | Text, pen, highlighter, fill and more |
@@ -49,7 +49,7 @@ SnipShot is a screenshot tool designed to integrate seamlessly with your profess
 | Windows App SDK | 1.8 |
 | WinUI | 3 |
 | Win2D | 1.3.2 |
-| C# | 12 |
+| C# | 14 |
 
 ### System Requirements
 
@@ -65,14 +65,15 @@ This landing page is built with modern web technologies to showcase SnipShot.
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| [Next.js](https://nextjs.org/) | 16.1.1 | React framework with App Router |
-| [React](https://react.dev/) | 19.2.3 | UI library |
+| [Next.js](https://nextjs.org/) | 16.3.1 | React framework with App Router |
+| [React](https://react.dev/) | 19.2.8 | UI library |
 | [Tailwind CSS](https://tailwindcss.com/) | v4 | Utility-first styling |
 | [shadcn/ui](https://ui.shadcn.com/) | - | UI components (new-york style) |
-| [Framer Motion](https://www.framer.com/motion/) | 12.x | Animations |
+| [Framer Motion](https://www.framer.com/motion/) | 13.x | Animations |
 | [next-themes](https://github.com/pacocoursey/next-themes) | 0.4.x | Light/dark theme |
-| [Lucide React](https://lucide.dev/) | - | Icons |
-| TypeScript | 5.x | Static typing |
+| [Lucide React](https://lucide.dev/) | 1.x | UI icons |
+| [Simple Icons](https://simpleicons.org/) | 16.x | Brand icons |
+| TypeScript | 6.x | Static typing |
 
 ## Development
 

@@ -2,7 +2,7 @@ import type { Translations } from "./es";
 
 export const en: Translations = {
   site: {
-    description: "A modern screenshot application for Windows built with WinUI 3.",
+    description: "Screenshot app for Windows 11, free and open source.",
   },
   nav: {
     features: "Features",
@@ -10,31 +10,33 @@ export const en: Translations = {
     technology: "Technology",
   },
   hero: {
-    badge: "Windows 11 · Free · Open Source",
+    eyebrow: "Windows 11 · Free · Open source",
     titleStart: "Capture, draw and ",
     titleAccent: "annotate",
-    description: "The modern screenshot tool for Windows. Designed with WinUI 3 for your professional workflow.",
+    description: "Grab any part of the screen, mark it up with arrows, text and highlighter, and pull out the text it contains.",
     cta: "Download SnipShot",
+    ctaSecondary: "View on GitHub",
   },
   featuresSection: {
     viewAll: "View all features",
   },
   toolsSection: {
-    more: "more",
     viewAll: "View all tools",
+    hint: "Pick a tool",
   },
   techSection: {
-    more: "more",
     viewAll: "View full tech stack",
   },
   download: {
-    badge: "Open Source · MIT License",
+    specSystem: "System",
+    specArch: "Architectures",
+    specLicense: "License",
+    specSource: "Download",
     titleStart: "Download ",
     titleAccent: "SnipShot",
     titleEnd: " for free",
-    description: "Completely free and open source. Boost your productivity with professional screenshots.",
+    description: "Free and open source. Installs by sideload, not through the Microsoft Store.",
     systemWindows: "Windows 11 (22H2+)",
-    architectures: "Architectures:",
     downloadButton: "Download for Windows",
     githubButton: "View on GitHub",
     versionNote: "Latest version available on GitHub Releases",
@@ -64,24 +66,30 @@ export const en: Translations = {
     dark: "Dark",
     system: "System",
   },
+  notFound: {
+    label: "Error 404",
+    title: "Nothing to capture here",
+    description: "The address you opened does not match any page on this site.",
+    cta: "Back to home",
+  },
   common: {
     home: "Home",
-    readyTitle: "Ready to get started?",
+    readyTitle: "Try it",
     downloadSnipshot: "Download SnipShot",
   },
   pages: {
     features: {
       badge: "Features",
-      ctaDescription: "Download SnipShot for free and experience a new way to capture.",
+      ctaDescription: "Download SnipShot and take your first capture on your own machine.",
     },
     tools: {
       badge: "Tools",
-      ctaDescription: "Download SnipShot for free and discover all the tools.",
+      ctaDescription: "Download SnipShot and mark up your captures with these tools.",
     },
     technology: {
       badge: "Technology",
       systemRequirementsTitle: "System requirements",
-      ctaDescription: "Download SnipShot for free and discover the difference.",
+      ctaDescription: "Download SnipShot for Windows 11, on x64 or ARM64.",
     },
   },
 };
