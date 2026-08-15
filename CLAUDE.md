@@ -21,9 +21,13 @@ This repo is only the marketing site; the app itself lives at
 There is no test suite. `npm run build` is the real gate: it runs TypeScript and
 prerenders every route, so a broken component or type fails it.
 
-**Known baseline:** `npm run lint` reports 3 pre-existing errors in
-`i18n/context.tsx:30` (`react-hooks/set-state-in-effect`). Don't read these as a
-regression from your change, and don't fix them unless asked.
+**Known baseline:** `npm run lint` reports 5 pre-existing `react-hooks/set-state-in-effect`
+errors, all on the same `setMounted(true)` hydration-guard pattern:
+`components/icons/simple-icon.tsx` (×2), `components/language-selector.tsx`,
+`components/mode-toggle.tsx`, and `i18n/context.tsx`. Don't read these as a regression
+from your change, and don't fix them unless asked. The count grew from 3 to 5 when
+`eslint-plugin-react-hooks` 7.0.1 → 7.1.1 widened the rule's detection — the code itself
+did not change.
 
 ## Stack
 
@@ -76,10 +80,9 @@ Two locales: `es` (default) and `en`.
 
 `overrides` in `package.json` exist for one reason: to force-upgrade transitive
 dependencies that `next` pins to vulnerable versions in its **own nested**
-`node_modules/next/node_modules`. Two are currently load-bearing:
-
-- `sharp >=0.35.3` — otherwise resolves 0.34.5 (GHSA-f88m-g3jw-g9cj)
-- `postcss >=8.5.23` — otherwise resolves ≤8.5.22 (4 advisories)
+`node_modules/next/node_modules`. **There are currently none** — `next@16.3.1` declares
+`postcss` 8.5.23 and `sharp` ^0.35.3 itself, so the two formerly load-bearing pins were
+removed as redundant. Re-add one only when a real advisory needs it.
 
 Rules learned the hard way:
 
@@ -91,6 +94,11 @@ Rules learned the hard way:
   report an override as unnecessary.
 - `>=` floors do not auto-update the lockfile. When a new advisory lands, raise the
   floor explicitly.
+- A `>=` floor can outlive its purpose and start **overriding a deliberate pin**. `next`
+  pins `postcss` to an exact version; once that version cleared the advisory, the
+  `postcss >=8.5.23` override was silently dragging next's nested copy above what next
+  had chosen. Check what the parent declares (`npm view <parent> dependencies`) before
+  assuming a floor is still additive.
 - After any dependency change: `npm audit` (expect 0) **and** `npm run build`.
 
 `allowScripts` records install scripts approved under npm 11's policy. Approve

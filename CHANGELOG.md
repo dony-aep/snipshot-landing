@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-08-15
+
+### Changed
+
+- Upgraded Next.js 16.2.11 → 16.3.1, which brings Turbopack build caching, lower
+  dev-server memory use, and native Node.js streams in the App Router rendering layer.
+- Upgraded four dependencies across a major boundary, none of which required code
+  changes: `lucide-react` 0.562.0 → 1.31.0, `framer-motion` 12.34.2 → 13.1.0,
+  `@vercel/analytics` 1.6.1 → 2.0.1, and TypeScript 5.9.3 → 6.0.3.
+- Aligned `@types/node` with the runtime it actually targets, 20.x → 24.x (Node 24 LTS).
+- Updated React and React DOM 19.2.3 → 19.2.8, `eslint-config-next` 16.2.6 → 16.3.1, and
+  the Radix UI, Tailwind CSS, `simple-icons`, and `tailwind-merge` lines to their current
+  patches and minors.
+
+### Removed
+
+- `experimental.viewTransition` from `next.config.ts`. Next.js 16.3 dropped the flag and
+  now fails the build on it as an unrecognized key. The project never rendered React's
+  `<ViewTransition>` component, so the flag was dormant and removing it changes nothing.
+
+### Security
+
+- Patched two high-severity transitive advisories: `js-yaml` 4.3.0 → 4.3.1
+  (GHSA-5p4m-2wfm-xmqj, quadratic CPU consumption resolving `!!omap`, reached via
+  `eslint` → `@eslint/eslintrc`) and `nanoid` 3.3.17 → 3.3.18 (GHSA-2v37-7h3g-55p8,
+  custom generators loop indefinitely when size is zero, reached via `postcss`). Both
+  fixed versions fell inside their parents' semver ranges, so nothing was downgraded.
+- Removed the last two dependency `overrides`. `next@16.3.1` now declares `postcss`
+  8.5.23 and `sharp` ^0.35.3 on its own, making both pins redundant — and the `postcss`
+  pin had started forcing next's nested copy *past* the version next deliberately pins.
+- `npm audit` reports 0 vulnerabilities across 506 packages, and GitHub Dependabot
+  reports no open alerts.
+
 ## [0.2.0] - 2026-08-03
 
 ### Added
@@ -70,5 +103,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project assets (screenshots, logo, preview GIF), README, and LICENSE.
 
 [Unreleased]: https://github.com/dony-aep/snipshot-landing/compare/main...HEAD
-[0.2.0]: https://github.com/dony-aep/snipshot-landing/compare/060b16f...main
+[0.3.0]: https://github.com/dony-aep/snipshot-landing/compare/0602290...main
+[0.2.0]: https://github.com/dony-aep/snipshot-landing/compare/060b16f...0602290
 [0.1.0]: https://github.com/dony-aep/snipshot-landing/commits/060b16f
