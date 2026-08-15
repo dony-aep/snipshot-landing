@@ -1,79 +1,75 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BackButton } from "@/components/back-button";
+import { PageHeader } from "@/components/layout";
+import { AdditionalFeatures, PageCTA } from "@/components/sections";
 import { getFeaturesHeader, getCaptureFeatures } from "@/data";
 import { useLocale } from "@/i18n";
 
 export function FeaturesContent() {
   const { locale, t } = useLocale();
-  const featuresHeader = getFeaturesHeader(locale);
-  const captureFeatures = getCaptureFeatures(locale);
+  const header = getFeaturesHeader(locale);
+  const features = getCaptureFeatures(locale);
 
   return (
-    <main className="min-h-screen pt-24 pb-24">
-      <div className="container mx-auto px-4">
-        <div className="mb-8">
-          <BackButton />
-        </div>
+    <div className="px-4 pb-24 pt-28 md:pt-32">
+      <div className="container mx-auto">
+        <PageHeader
+          eyebrow={t.pages.features.badge}
+          title={header.title}
+          description={header.description}
+        />
 
-        <div className="max-w-3xl mb-24">
-          <Badge variant="outline" className="mb-4">{t.pages.features.badge}</Badge>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-            {featuresHeader.title}
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            {featuresHeader.description}
-          </p>
-        </div>
-
-        <div className="space-y-28 md:space-y-36">
-          {captureFeatures.map((feature, index) => {
-            const isEven = index % 2 === 0;
+        <div className="mt-20 space-y-24 md:mt-24 md:space-y-32">
+          {features.map((feature, index) => {
+            // El orden se invierte con `order`, no con `direction: rtl`, que
+            // además de la columna voltea la bidireccionalidad del texto.
+            const flipped = index % 2 === 1;
             return (
-              <section 
+              <article
                 key={feature.title}
-                className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${!isEven ? "lg:[direction:rtl]" : ""}`}
+                className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
               >
-                <div className="aspect-square w-full max-w-2xl mx-auto bg-card/50 rounded-2xl relative overflow-hidden lg:[direction:ltr] border border-border/40">
-                  {feature.image ? (
-                    <Image src={feature.image} alt={feature.title} fill className="object-cover" />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
-                      <feature.icon className="h-28 w-28 text-primary/15" />
-                    </div>
-                  )}
-                </div>
-                <div className="lg:[direction:ltr] space-y-5">
+                {feature.image && (
+                  <div
+                    className={`overflow-hidden border border-rule bg-card ${
+                      flipped ? "lg:order-2" : ""
+                    }`}
+                  >
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      width={1080}
+                      height={1080}
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="h-auto w-full"
+                    />
+                  </div>
+                )}
+                <div className={flipped ? "lg:order-1" : ""}>
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/8">
-                      <feature.icon className="h-6 w-6 text-primary" />
+                    <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-rule bg-card">
+                      <feature.icon className="h-5 w-5 text-selection" />
                     </div>
                     {feature.badge && <Badge variant="secondary">{feature.badge}</Badge>}
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold">{feature.title}</h2>
-                  <p className="text-base text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <h2 className="mt-6 text-2xl font-semibold tracking-tight sm:text-3xl">
+                    {feature.title}
+                  </h2>
+                  <p className="mt-4 max-w-md text-pretty leading-relaxed text-muted-foreground">
+                    {feature.description}
+                  </p>
                 </div>
-              </section>
+              </article>
             );
           })}
         </div>
 
-        <div className="mt-28 md:mt-36 text-center py-16 bg-card/50 rounded-2xl border border-border/40">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">{t.common.readyTitle}</h3>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">{t.pages.features.ctaDescription}</p>
-          <Button size="lg" className="rounded-full px-8 group" asChild>
-            <Link href="/#download">
-              <Download className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-              {t.common.downloadSnipshot}
-            </Link>
-          </Button>
-        </div>
+        <AdditionalFeatures />
+
+        <PageCTA description={t.pages.features.ctaDescription} />
       </div>
-    </main>
+    </div>
   );
 }

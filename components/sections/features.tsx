@@ -1,92 +1,75 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { getFeaturesHeader, getCaptureFeatures } from "@/data";
 import { useLocale } from "@/i18n";
-import { motion } from "framer-motion";
 
 export function Features() {
   const { locale, t } = useLocale();
-  const featuresHeader = getFeaturesHeader(locale);
-  const previewFeatures = getCaptureFeatures(locale).slice(0, 3);
+  const header = getFeaturesHeader(locale);
+  const features = getCaptureFeatures(locale);
 
   return (
-    <section id="features" className="py-24 md:py-32">
-      <div className="container mx-auto px-4">
-        {/* Header con animaciones */}
-        <div className="mx-auto max-w-2xl text-center mb-16">
-          <motion.h2 
-            className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-5"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+    <section id="features" className="px-4 py-20 md:py-24">
+      <div className="container mx-auto">
+        {/* Cabecera a dos columnas: el enlace se alinea con el titular en vez de
+            colgar centrado bajo la rejilla. */}
+        <div className="mb-14 flex flex-col gap-6 border-b border-rule pb-10 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-xl">
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+              {header.title}
+            </h2>
+            <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
+              {header.description}
+            </p>
+          </div>
+          <Link
+            href="/features"
+            className="group inline-flex shrink-0 items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
           >
-            {featuresHeader.title}
-          </motion.h2>
-          <motion.p 
-            className="text-muted-foreground text-lg"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          >
-            {featuresHeader.description}
-          </motion.p>
+            {t.featuresSection.viewAll}
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
 
-        {/* Preview Grid - 3 columnas */}
-        <div className="grid md:grid-cols-3 gap-5 mb-12 max-w-5xl mx-auto">
-          {previewFeatures.map((feature, index) => (
-            <motion.div
+        {/* Hoja de contactos. La columna central baja para que la retícula no
+            se lea como una tabla de tarjetas. */}
+        <div className="grid items-start gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:[&>*:nth-child(3n+2)]:mt-16">
+          {features.map((feature, index) => (
+            <motion.figure
               key={feature.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.55, delay: (index % 3) * 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Card className="h-full border-border/40 bg-card/50 hover:bg-card hover:border-border/80 transition-all duration-300">
-                <CardContent className="p-6">
-                  {/* Icon */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/8">
-                      <feature.icon className="h-5 w-5 text-primary" />
-                    </div>
-                    {feature.badge && (
-                      <Badge variant="secondary" className="text-xs">
-                        {feature.badge}
-                      </Badge>
-                    )}
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
+              {feature.image && (
+                <div className="overflow-hidden border border-rule bg-card">
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    width={1080}
+                    height={1080}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="h-auto w-full"
+                  />
+                </div>
+              )}
+              <figcaption className="mt-4">
+                <div className="flex items-center gap-2.5">
+                  <feature.icon className="h-4 w-4 shrink-0 text-selection" />
+                  <h3 className="text-base font-semibold tracking-tight">{feature.title}</h3>
+                </div>
+                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                  {feature.description}
+                </p>
+              </figcaption>
+            </motion.figure>
           ))}
         </div>
-
-        {/* Ver más link */}
-        <motion.div 
-          className="text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <Button variant="ghost" className="group" asChild>
-            <Link href="/features">
-              {t.featuresSection.viewAll}
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
-        </motion.div>
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import { SiteConfig, NavItem } from "@/types";
 
 export const siteConfig: SiteConfig = {
   name: "SnipShot",
-  description: "Una aplicación de captura de pantalla moderna para Windows desarrollada con WinUI 3.",
+  description: "Aplicación de captura de pantalla para Windows 11, gratis y de código abierto.",
   author: {
     name: "dony.",
     github: "https://github.com/dony-aep",
