@@ -55,8 +55,6 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react", "framer-motion", "simple-icons"],
     // Cache de Turbopack para desarrollo más rápido
     turbopackFileSystemCacheForDev: true,
-    // View Transitions - Animaciones suaves entre páginas
-    viewTransition: true,
   },
 };
 
