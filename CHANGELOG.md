@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-09-15
+
+### Changed
+
+- Updated React and React DOM 19.2.8 → 19.3.0 with their type definitions,
+  `eslint-config-next` 16.3.1 → 16.3.5 to match Next.js, and `framer-motion`,
+  `lucide-react`, `simple-icons` and `tailwind-merge` to their current minors. None of
+  them required code changes.
+
+### Security
+
+- Upgraded Next.js 16.3.1 → 16.3.5, which closes two critical remote code execution
+  advisories: GHSA-p293-qw3h-jr36, on Windows-hosted servers, and GHSA-2xp9-vwfh-vxw4, in
+  the Image Optimization API when it handles AVIF files. 16.3.3 was the first patched
+  release.
+- Patched two high-severity transitive advisories. `sharp` 0.35.3 → 0.35.4
+  (GHSA-rgj7-g3m4-5g8c, vulnerabilities in its bundled libheif) arrived with Next.js
+  16.3.5, which now requires `^0.35.4` itself, so no override was needed. `js-yaml` 4.3.1
+  → 4.3.2 (GHSA-2883-xcg3-v3hh, `maxTotalMergeKeys` did not limit CPU use for empty merge
+  sources, reached via `eslint` → `@eslint/eslintrc`) fell inside its parent's `^4.3.0`.
+- `npm audit` reports 0 vulnerabilities.
+
 ## [0.4.0] - 2026-08-15
 
 ### Added
@@ -243,7 +265,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project assets (screenshots, logo, preview GIF), README, and LICENSE.
 
 [Unreleased]: https://github.com/dony-aep/snipshot-landing/compare/main...HEAD
-[0.4.0]: https://github.com/dony-aep/snipshot-landing/compare/ca6d280...main
+[0.4.1]: https://github.com/dony-aep/snipshot-landing/compare/63fda97...main
+[0.4.0]: https://github.com/dony-aep/snipshot-landing/compare/ca6d280...63fda97
 [0.3.0]: https://github.com/dony-aep/snipshot-landing/compare/0602290...ca6d280
 [0.2.0]: https://github.com/dony-aep/snipshot-landing/compare/060b16f...0602290
 [0.1.0]: https://github.com/dony-aep/snipshot-landing/commits/060b16f

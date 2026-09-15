@@ -80,8 +80,8 @@ Two locales: `es` (default) and `en`.
 
 `overrides` in `package.json` exist for one reason: to force-upgrade transitive
 dependencies that `next` pins to vulnerable versions in its **own nested**
-`node_modules/next/node_modules`. **There are currently none** — `next@16.3.1` declares
-`postcss` 8.5.23 and `sharp` ^0.35.3 itself, so the two formerly load-bearing pins were
+`node_modules/next/node_modules`. **There are currently none** — `next@16.3.5` declares
+`postcss` 8.5.23 and `sharp` ^0.35.4 itself, so the two formerly load-bearing pins were
 removed as redundant. Re-add one only when a real advisory needs it.
 
 Rules learned the hard way:

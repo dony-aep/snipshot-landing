@@ -65,8 +65,8 @@ This landing page is built with modern web technologies to showcase SnipShot.
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| [Next.js](https://nextjs.org/) | 16.3.1 | React framework with App Router |
-| [React](https://react.dev/) | 19.2.8 | UI library |
+| [Next.js](https://nextjs.org/) | 16.3.5 | React framework with App Router |
+| [React](https://react.dev/) | 19.3.0 | UI library |
 | [Tailwind CSS](https://tailwindcss.com/) | v4 | Utility-first styling |
 | [shadcn/ui](https://ui.shadcn.com/) | - | UI components (new-york style) |
 | [Framer Motion](https://www.framer.com/motion/) | 13.x | Animations |

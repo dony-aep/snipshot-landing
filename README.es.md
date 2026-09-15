@@ -65,8 +65,8 @@ Esta landing page está construida con tecnologías web modernas para presentar 
 
 | Tecnología | Versión | Propósito |
 |------------|---------|-----------|
-| [Next.js](https://nextjs.org/) | 16.3.1 | Framework React con App Router |
-| [React](https://react.dev/) | 19.2.8 | Biblioteca de UI |
+| [Next.js](https://nextjs.org/) | 16.3.5 | Framework React con App Router |
+| [React](https://react.dev/) | 19.3.0 | Biblioteca de UI |
 | [Tailwind CSS](https://tailwindcss.com/) | v4 | Estilos utility-first |
 | [shadcn/ui](https://ui.shadcn.com/) | - | Componentes UI (estilo new-york) |
 | [Framer Motion](https://www.framer.com/motion/) | 13.x | Animaciones |
