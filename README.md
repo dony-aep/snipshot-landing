@@ -65,11 +65,11 @@ This landing page is built with modern web technologies to showcase SnipShot.
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| [Next.js](https://nextjs.org/) | 16.3.5 | React framework with App Router |
+| [Next.js](https://nextjs.org/) | 16.4.0 | React framework with App Router |
 | [React](https://react.dev/) | 19.3.0 | UI library |
 | [Tailwind CSS](https://tailwindcss.com/) | v4 | Utility-first styling |
 | [shadcn/ui](https://ui.shadcn.com/) | - | UI components (new-york style) |
-| [Framer Motion](https://www.framer.com/motion/) | 13.x | Animations |
+| [Framer Motion](https://www.framer.com/motion/) | 14.x | Animations |
 | [next-themes](https://github.com/pacocoursey/next-themes) | 0.4.x | Light/dark theme |
 | [Lucide React](https://lucide.dev/) | 1.x | UI icons |
 | [Simple Icons](https://simpleicons.org/) | 16.x | Brand icons |

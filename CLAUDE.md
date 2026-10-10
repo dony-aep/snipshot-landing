@@ -80,7 +80,7 @@ Two locales: `es` (default) and `en`.
 
 `overrides` in `package.json` exist for one reason: to force-upgrade transitive
 dependencies that `next` pins to vulnerable versions in its **own nested**
-`node_modules/next/node_modules`. **There are currently none** — `next@16.3.5` declares
+`node_modules/next/node_modules`. **There are currently none** — `next@16.4.0` declares
 `postcss` 8.5.23 and `sharp` ^0.35.4 itself, so the two formerly load-bearing pins were
 removed as redundant. Re-add one only when a real advisory needs it.
 
@@ -99,7 +99,12 @@ Rules learned the hard way:
   `postcss >=8.5.23` override was silently dragging next's nested copy above what next
   had chosen. Check what the parent declares (`npm view <parent> dependencies`) before
   assuming a floor is still additive.
-- After any dependency change: `npm audit` (expect 0) **and** `npm run build`.
+- After any dependency change: `npm audit` **and** `npm run build`. The audit's known
+  baseline is 5 high, all one chain: `braces` 3.0.3 (GHSA-vfj7-8cjw-p6xm) has no
+  patched release and is reached only by lint tooling, via `eslint-config-next` →
+  `@next/eslint-plugin-next` → `fast-glob` → `micromatch`. Anything beyond that chain is
+  new. Never take the `npm audit fix --force` it suggests: it downgrades
+  `eslint-config-next` to 14.
 
 `allowScripts` records install scripts approved under npm 11's policy. Approve
 deliberately, one package at a time — never blanket-approve.

@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-10
+
+### Changed
+
+- Upgraded `framer-motion` 13.3.0 → 14.1.0. The major only removes internal APIs, and
+  the site imports nothing but `motion` and `useReducedMotion`, so no code changed.
+- Updated `eslint-config-next` 16.3.5 → 16.4.0 to match Next.js, and `lucide-react`,
+  `simple-icons`, the Radix UI primitives and `@types/node` to their current patches and
+  minors. `@types/node` stays on 24.x, the Node LTS the site runs on.
+
+### Security
+
+- Upgraded Next.js 16.3.5 → 16.4.0, which closes seven advisories. The critical one,
+  GHSA-vcvr-r3jv-pc5j, is a remote code execution in `next/og`'s `ImageResponse`, which
+  the site does not import. The other six are a server-side request forgery in Image
+  Optimization (GHSA-cjq9-62q9-8jv4, high), two cache-poisoning bugs in SSG and ISR
+  rendering (GHSA-4jqv-mc3x-m676, GHSA-mcj8-r9mp-w47p), Draft Mode content leaking
+  through a pending `use cache` fill (GHSA-3w37-wq28-93x7), and information disclosure in
+  metadata image routes (GHSA-f87g-xv8r-7p7x) and in the development server's MCP
+  endpoint (GHSA-39w2-rjm5-chcv). 16.3.8 was the first release to fix all seven.
+- Patched three transitive packages, each inside its parent's semver range, so no
+  override was needed. `sharp` 0.35.4 → 0.35.5 (GHSA-wq5f-xc86-pv6w, CVE-2026-96889 in
+  its bundled librsvg) fits the `^0.35.4` that Next.js 16.4.0 declares. `source-map-js`
+  1.2.1 → 1.2.2 (GHSA-68fv-2mgg-jv7q, event-loop denial of service through indexed
+  source-map section offsets) arrives through `postcss` and Tailwind CSS.
+  `brace-expansion` 1.1.18 → 1.1.21 and 5.0.9 → 5.0.12 (GHSA-6j4f-fj2g-mc7p,
+  GHSA-qhr7-859c-m2p7, GHSA-q2hr-2g5m-vwhr, denial of service through nested brace
+  patterns) arrives through `minimatch` in ESLint and its plugins.
+- `braces` 3.0.3 remains exposed to GHSA-vfj7-8cjw-p6xm, a stack-exhaustion denial of
+  service through deeply nested patterns, because no patched release exists. It is only
+  reachable from lint tooling, via `eslint-config-next` → `@next/eslint-plugin-next` →
+  `fast-glob` → `micromatch`. `next build` no longer runs ESLint, so it executes only
+  under `npm run lint`, against globs from the project's own config. `npm audit` reports
+  that one chain as 5 high-severity findings. Its suggested `--force` fix would
+  downgrade `eslint-config-next` to 14.2.35, which fixes nothing.
+
 ## [0.4.1] - 2026-09-15
 
 ### Changed
@@ -265,7 +301,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project assets (screenshots, logo, preview GIF), README, and LICENSE.
 
 [Unreleased]: https://github.com/dony-aep/snipshot-landing/compare/main...HEAD
-[0.4.1]: https://github.com/dony-aep/snipshot-landing/compare/63fda97...main
+[0.5.0]: https://github.com/dony-aep/snipshot-landing/compare/050124c...main
+[0.4.1]: https://github.com/dony-aep/snipshot-landing/compare/63fda97...050124c
 [0.4.0]: https://github.com/dony-aep/snipshot-landing/compare/ca6d280...63fda97
 [0.3.0]: https://github.com/dony-aep/snipshot-landing/compare/0602290...ca6d280
 [0.2.0]: https://github.com/dony-aep/snipshot-landing/compare/060b16f...0602290

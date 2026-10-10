@@ -65,11 +65,11 @@ Esta landing page está construida con tecnologías web modernas para presentar 
 
 | Tecnología | Versión | Propósito |
 |------------|---------|-----------|
-| [Next.js](https://nextjs.org/) | 16.3.5 | Framework React con App Router |
+| [Next.js](https://nextjs.org/) | 16.4.0 | Framework React con App Router |
 | [React](https://react.dev/) | 19.3.0 | Biblioteca de UI |
 | [Tailwind CSS](https://tailwindcss.com/) | v4 | Estilos utility-first |
 | [shadcn/ui](https://ui.shadcn.com/) | - | Componentes UI (estilo new-york) |
-| [Framer Motion](https://www.framer.com/motion/) | 13.x | Animaciones |
+| [Framer Motion](https://www.framer.com/motion/) | 14.x | Animaciones |
 | [next-themes](https://github.com/pacocoursey/next-themes) | 0.4.x | Tema claro/oscuro |
 | [Lucide React](https://lucide.dev/) | 1.x | Iconos de UI |
 | [Simple Icons](https://simpleicons.org/) | 16.x | Iconos de marca |
