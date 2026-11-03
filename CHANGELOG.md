@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-11-03
+
+### Changed
+
+- Updated React and React DOM 19.3.0 → 19.3.1, `eslint-config-next` 16.4.0 → 16.4.5 to
+  match Next.js, and `framer-motion`, `lucide-react`, `simple-icons`, Tailwind CSS and the
+  Radix UI primitives to their current patches and minors. None of them required code
+  changes. TypeScript 7 and ESLint 10 stay out, because `typescript-eslint` 8.72.1 accepts
+  TypeScript below 6.1 and three plugins that `eslint-config-next` depends on
+  (`eslint-plugin-react`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`) accept ESLint
+  up to 9.
+
+### Security
+
+- Upgraded Next.js 16.4.0 → 16.4.5, which closes three advisories first patched in
+  16.4.1. Two are critical unauthenticated remote code executions, one in `use cache`
+  functions that return typed arrays (GHSA-673q-mjm6-r5xr) and one in the Image
+  Optimization API when it handles SVG files (GHSA-2464-fhr4-w9xw). The third is a
+  denial of service in App Router Server Actions (GHSA-p3m5-59mp-jv5r, CVE-2026-94482,
+  high). The site defines no `use cache` functions and no Server Actions.
+- Patched `zod` 4.6.5 → 4.6.7 (GHSA-mrhx-c7xc-m3w5, CVE-2023-54404, high), which could
+  exhaust memory while validating oversized constrained collections. It arrives through
+  `eslint-plugin-react-hooks`, whose `^3.25.0 || ^4.0.0` range already admits the fix, so
+  no override was needed.
+- `braces` 3.0.3 no longer counts against the audit: GitHub withdrew GHSA-vfj7-8cjw-p6xm
+  on 2026-10-23.
+- `minimatch` 3.1.5 and 10.2.6 remain exposed to GHSA-g3hv-75wg-m249 (CVE-2026-118764,
+  moderate), a denial of service through globparts amplification. Only 11.0.1 fixes it,
+  and every parent in the tree still declares `^3` or `^10`, ESLint 10 included. It is
+  reachable only from lint tooling, through ESLint, its plugins and `typescript-eslint`,
+  and `npm audit` reports that chain as 16 moderate findings. Its suggested `--force`
+  fix would downgrade ESLint to 4.0.0 and `eslint-config-next` to 12.0.4.
+
 ## [0.5.0] - 2026-10-10
 
 ### Changed
@@ -301,7 +334,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project assets (screenshots, logo, preview GIF), README, and LICENSE.
 
 [Unreleased]: https://github.com/dony-aep/snipshot-landing/compare/main...HEAD
-[0.5.0]: https://github.com/dony-aep/snipshot-landing/compare/050124c...main
+[0.5.1]: https://github.com/dony-aep/snipshot-landing/compare/d9c4c43...main
+[0.5.0]: https://github.com/dony-aep/snipshot-landing/compare/050124c...d9c4c43
 [0.4.1]: https://github.com/dony-aep/snipshot-landing/compare/63fda97...050124c
 [0.4.0]: https://github.com/dony-aep/snipshot-landing/compare/ca6d280...63fda97
 [0.3.0]: https://github.com/dony-aep/snipshot-landing/compare/0602290...ca6d280

@@ -80,8 +80,8 @@ Two locales: `es` (default) and `en`.
 
 `overrides` in `package.json` exist for one reason: to force-upgrade transitive
 dependencies that `next` pins to vulnerable versions in its **own nested**
-`node_modules/next/node_modules`. **There are currently none** — `next@16.4.0` declares
-`postcss` 8.5.23 and `sharp` ^0.35.4 itself, so the two formerly load-bearing pins were
+`node_modules/next/node_modules`. **There are currently none** — `next@16.4.5` declares
+`postcss` 8.5.23 and `sharp` ^0.35.5 itself, so the two formerly load-bearing pins were
 removed as redundant. Re-add one only when a real advisory needs it.
 
 Rules learned the hard way:
@@ -100,11 +100,12 @@ Rules learned the hard way:
   had chosen. Check what the parent declares (`npm view <parent> dependencies`) before
   assuming a floor is still additive.
 - After any dependency change: `npm audit` **and** `npm run build`. The audit's known
-  baseline is 5 high, all one chain: `braces` 3.0.3 (GHSA-vfj7-8cjw-p6xm) has no
-  patched release and is reached only by lint tooling, via `eslint-config-next` →
-  `@next/eslint-plugin-next` → `fast-glob` → `micromatch`. Anything beyond that chain is
-  new. Never take the `npm audit fix --force` it suggests: it downgrades
-  `eslint-config-next` to 14.
+  baseline is 16 moderate, all one advisory: `minimatch` <11.0.1 (GHSA-g3hv-75wg-m249)
+  is pulled in as `^3` by ESLint 9 and its plugins and as `^10` by `typescript-eslint`
+  and `@eslint/config-array`, so it is reached only by lint tooling. No parent accepts
+  11 yet, ESLint 10 included. Anything beyond that chain is new. Never take the
+  `npm audit fix --force` it suggests: it downgrades ESLint to 4 and
+  `eslint-config-next` to 12.
 
 `allowScripts` records install scripts approved under npm 11's policy. Approve
 deliberately, one package at a time — never blanket-approve.
