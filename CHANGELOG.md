@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Rewrote `README.md` and `README.es.md`. Both now open by saying the repository is the
+  SnipShot marketing site, and link to the app repository and to the live site at
+  https://snipshotw3.vercel.app/. Phrases such as "una aplicación de captura de pantalla
+  moderna" and "potentes funcionalidades de anotación" are gone, and the features table
+  says what each feature does. The separate list of annotation tools moved into that
+  table, and the app's tech-stack table became one sentence.
+- Both READMEs now also cover `npm run clean`, the
+  `page.tsx`/`content.tsx` split, the translation files and the Vercel deploy. It installs
+  with `npm ci`, since the repository commits `package-lock.json`.
+
 ## [0.5.1] - 2026-11-03
 
 ### Changed
